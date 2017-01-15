@@ -30,12 +30,14 @@ case class SyncRGB(
 }
 
 val clr = SyncRGB(0, 0, 0, "Pitch Black")
+
+/** When we want to get to attribute values, i.e. RGB and name ...*/
 val clrInt0 = clr.getRGB
 // Here some thread may interfere invoking clr.set(...)!!
 val name0 = clr.getName
-// As a result clrInt0 and name0 may represent different states!
+/** As a result clrInt0 and name0 may represent different states! */
 
-// Binding together to hold state consistency!
+// Binding together the locks to maintain state consistency when getting!
 val (clrInt, name) = clr synchronized {
   (clr.getRGB, clr.getName)
 }
@@ -43,4 +45,9 @@ val (clrInt, name) = clr synchronized {
 println(clrInt)
 println(name)
 
-val clrWrong = SyncRGB(0, 256, 0, "Impossible")
+try {
+  val clrWrong = SyncRGB(0, 256, 0, "Impossible")
+} catch {
+  case (e: IllegalArgumentException) => {
+    println { "#Contract violation: impossible color.#" }
+  }}

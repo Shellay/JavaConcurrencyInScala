@@ -1,21 +1,27 @@
-/** Memory Consistency Errors 
+/** Memory Consistency Errors
+  * 
+  * + Different threads have inconsistent views of same data.
+  * + "happens-before" relationship.
+  *   + with sync
+  * 
+  */
 
-  * different threads have inconsistent views of same data
-
-  * happens-before relationship
-  * * with sync
-
-  Rules
-
-  Given statements s, p, t; thread T, R
-
-  // fork-consistency
-  * s = (T.body."R.start"), forall p: hp-bf(p, s) =>
-  *   forall r in R.body: hp-bf(p, r)
-
-  // join-consistency
-  * r = (T.body."return xxx"), j = (R.body.join(T)) =>
-  *   forall p in T.body: forall q in R.body, j < q: hp-bf(p, q)
-
+/** Rules of "happens-before"
+  * 
+  * Given statements s, p, r, j; threads T, R, X; thread's exec statement T.s
+  * // fork-consistency
+  * + let s = T."R.start",
+  *       forall X, X.p, hp-bf(X.p, s)
+  *   =>
+  *     forall R, R.r:
+  *       hp-bf(X.p, R.r)
+  * 
+  * // join-consistency
+  * + let T.r = T."return xxx",
+  *       R.j = R."T.join"
+  *   =>
+  *     forall T.p:
+  *     forall R.q, hp-bf(R.j, R.q):
+  *       hp-bf(p, q)
   */
 

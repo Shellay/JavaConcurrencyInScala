@@ -1,10 +1,9 @@
 /** Strategy for definint immutable objects
-
-  - No "inplace setter" methods.
-  - Make all fields (final) and (private???).
-  - No overriding - (final class) or (private constructor + factory)
-  - Provides no methods modifying unavoidable mutable fields.
-
+  * 
+  * - No "inplace setter" methods.
+  * - Make all fields [[final]] and [[private]]???.
+  * - No overriding - [[final class]] or [[private]] constructor with factory methods
+  * - Provides no methods for modifying refered mutable fields.
   */
 
 case class ImmutableRGB(

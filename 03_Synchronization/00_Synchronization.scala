@@ -1,15 +1,11 @@
-/**
-  * Thread communication
-  * ! thread interference
-  * ! memory inconsistency
+/** Thread communication
+  + thread interference
+  + memory inconsistency
   */
 
-/**
-  * Synchronization
-  * ! contention
-  * !! starvation
-  * !! livelock
+/** Synchronization
+
+  + contention
+    + starvation
+    + livelock
   */
-
-
-
